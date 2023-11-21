@@ -2,6 +2,8 @@
 #
 .DS_Store
 
+
+**/.png-cache
 # Xcode
 #
 build/
