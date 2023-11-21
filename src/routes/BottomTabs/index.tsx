@@ -26,7 +26,7 @@ const BottomTabs = () => {
         headerTitle: '',
         tabBarLabelStyle: {
           fontSize: 12,
-          textAlign: 'center' as const,
+          textAlign: 'center',
         },
       }}>
       <Tab.Screen
