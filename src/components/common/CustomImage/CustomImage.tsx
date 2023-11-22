@@ -37,10 +37,10 @@ const CustomImage: React.FC<CustomImageProps> = ({image, style, animation}) => {
     );
   }
 
-  // Otherwise, if there's an image prop, render an Image component
   if (!image) {
     return null;
   }
+  // Otherwise, if there's an image prop, render an Image component
   const imageSource = typeof image === 'number' ? image : {uri: image};
   return <Image style={style} source={imageSource} />;
 };

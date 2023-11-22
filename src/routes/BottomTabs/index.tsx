@@ -1,8 +1,12 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {memo} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+//tab options which is reusable and easy to manage
 import {createTabOptions} from 'components/bottomTabOption';
+//assets
 import {HomeActive, HomeInActive, ScrapActive, ScrapInActive} from 'assets';
+//screens
 import HomeScreen from 'screens/HomeScreen';
 import ScrapScreen from 'screens/ScrapScreen';
 
