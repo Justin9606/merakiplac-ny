@@ -64,13 +64,20 @@
     },
     "plugins": [
       {
-        "name": "typescript-styled-plugin",
+        "name": "@styled/typescript-styled-plugin",
         "lint": {
           "validProperties": [
+            "shadow-color",
+            "shadow-opacity",
+            "shadow-offset",
+            "shadow-radius",
+            "padding-horizontal",
+            "padding-vertical",
             "margin-vertical",
             "margin-horizontal",
-            "padding-horizontal",
-            "padding-vertical"
+            "tint-color",
+            "aspect-ratio",
+            "elevation"
           ]
         }
       }
