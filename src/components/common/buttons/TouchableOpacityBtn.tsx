@@ -11,7 +11,7 @@ const TouchableOpacityBtn: React.FC<Props> = ({
   ...propsOthers
 }) => {
   return (
-    <TouchableOpacity activeOpacity={1} onPress={onPress} {...propsOthers}>
+    <TouchableOpacity activeOpacity={0.7} onPress={onPress} {...propsOthers}>
       {children}
     </TouchableOpacity>
   );

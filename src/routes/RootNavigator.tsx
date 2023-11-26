@@ -19,7 +19,6 @@ const RootNavigator = () => {
         component={BottomTabs}
         options={{headerShown: false}}
       />
-
       <Stack.Screen
         name="WebViewScreen"
         component={WebViewScreen}
