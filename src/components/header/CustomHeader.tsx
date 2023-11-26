@@ -7,6 +7,7 @@ import CustomImage from 'components/common/CustomImage';
 import {FilterButton, TouchableOpacityBtn} from 'components/common/buttons';
 import {colors} from 'constants/colors';
 import styled from 'styled-components/native';
+import {Spacer} from 'components/common';
 
 type Props = {
   title?: string;
@@ -82,12 +83,14 @@ const CustomHeader: React.FC<Props> = ({
             active={active}
             onPress={onPressHeaderFilter}
           />
+          <Spacer width={7} />
           <FilterButton
             text={filterHeaderText ? filterHeaderText : '전체 날짜'}
             iconType={'calendar'}
             active={active}
             onPress={onPressHeaderFilter}
           />
+          <Spacer width={7} />
           <FilterButton
             text={filterHeaderText ? filterHeaderText : '전체 국가'}
             active={active}
