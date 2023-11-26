@@ -1,11 +1,24 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
+import {FilterModal} from 'components/common';
+import {CustomHeader} from 'components/header';
 
 const HomeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
+    <>
+      <CustomHeader
+        headerType="custom"
+        onPressHeaderFilter={() => setModalVisible(true)}
+      />
+
+      <FilterModal
+        isVisible={modalVisible}
+        onApplyFilter={() => setModalVisible(false)}
+      />
+
+      <ScrollView></ScrollView>
+    </>
   );
 };
 
