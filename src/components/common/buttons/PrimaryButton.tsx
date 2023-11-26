@@ -7,19 +7,15 @@ type PrimaryButtonProps = {
   text: string;
   onPress: () => void;
   paddingHorizontal?: number;
-  paddingVertical?: number;
 };
 
 const PrimaryButton: React.FC<PrimaryButtonProps> = ({
   onPress,
   text,
-  paddingVertical,
   paddingHorizontal,
 }) => {
   return (
-    <Wrapper
-      paddingVertical={paddingVertical}
-      paddingHorizontal={paddingHorizontal}>
+    <Wrapper paddingHorizontal={paddingHorizontal}>
       <Button onPress={onPress}>
         <Text>{text}</Text>
       </Button>
@@ -30,18 +26,12 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
 export default PrimaryButton;
 
 const Wrapper = styled.View<{
-  paddingVertical?: number;
   paddingHorizontal?: number;
 }>`
   padding-horizontal: ${props =>
     props.paddingHorizontal !== null && props.paddingHorizontal !== undefined
       ? props.paddingHorizontal
-      : 24}px;
-
-  padding-vertical: ${props =>
-    props.paddingVertical !== null && props.paddingVertical !== undefined
-      ? props.paddingVertical
-      : 12}px;
+      : 20}px;
 `;
 
 const Button = styled(TouchableOpacityBtn)`
@@ -56,4 +46,8 @@ const Text = styled.Text`
   font-size: 16px;
   font-weight: 600;
   color: ${colors.white};
+  font-style: normal;
+  text-align: center;
+  font-family: Apple SD Gothic Neo;
+  line-height: 24px;
 `;
