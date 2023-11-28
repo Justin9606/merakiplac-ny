@@ -31,7 +31,7 @@ const CustomImage: React.FC<CustomImageProps> = ({image, style, animation}) => {
           width: '100%',
           ...animation.style,
         }}
-        resizeMode="cover"
+        resizeMode="contain"
         source={animationSource}
       />
     );

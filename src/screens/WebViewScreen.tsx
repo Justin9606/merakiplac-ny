@@ -1,16 +1,12 @@
-import {CustomHeader} from 'components/header';
 import React from 'react';
 import WebView from 'react-native-webview';
+import {StackScreenProps} from '@react-navigation/stack';
+import {CustomHeader} from 'components/header';
 
-type WebviewParams = {
-  WebViewUrl: string;
-  title: string;
-  originWhitelist?: string[];
-};
+type Props = StackScreenProps<MainStackType, 'WebViewScreen'>;
 
-const WebViewScreen: React.FC<WebviewParams> = ({route}: any) => {
-  const params = {...route.params, ...(route.params?.params || {})};
-  const {WebViewUrl, title, originWhitelist} = params;
+const WebViewScreen: React.FC<Props> = ({route}) => {
+  const {WebViewUrl, title, originWhitelist} = route.params;
 
   return (
     <>
@@ -20,7 +16,7 @@ const WebViewScreen: React.FC<WebviewParams> = ({route}: any) => {
         leftBtnType="arrowLeft"
       />
       <WebView
-        originWhitelist={originWhitelist ? originWhitelist : undefined}
+        originWhitelist={originWhitelist || ['*']}
         allowsInlineMediaPlayback
         startInLoadingState
         decelerationRate="normal"

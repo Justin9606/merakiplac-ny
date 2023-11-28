@@ -5,24 +5,26 @@ import styled from 'styled-components/native';
 import CustomImage from '../CustomImage';
 import {Spacer} from 'components/common';
 
-type Props = {
+export type TextInputProps = {
   label?: string;
   value?: string;
-  onTextChange?: (text: string) => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
   placeholder?: string;
   rightItemType?: 'calendar' | 'clear' | 'none';
+  onChangeText?: (text: string) => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onPressDatePicker?: () => void;
 };
 
-const InputField: React.FC<Props> = ({
+const InputField: React.FC<TextInputProps> = ({
   label,
   value,
-  onTextChange,
-  onFocus,
-  onBlur,
   placeholder,
   rightItemType,
+  onChangeText,
+  onFocus,
+  onBlur,
+  onPressDatePicker,
 }) => {
   const [focused, setFocused] = useState(false);
 
@@ -41,6 +43,7 @@ const InputField: React.FC<Props> = ({
       <Label>{label}</Label>
       <InputWrapper focused={focused}>
         <Input
+          onChangeText={onChangeText}
           defaultValue={value}
           placeholder={placeholder}
           onFocus={_onFocus}
@@ -52,7 +55,7 @@ const InputField: React.FC<Props> = ({
           }}
         />
         {rightItemType !== 'none' && (
-          <AbSoluteItem>
+          <AbSoluteItem onPress={onPressDatePicker}>
             <CustomImage image={ICONS[rightItemType]} />
           </AbSoluteItem>
         )}
@@ -94,9 +97,8 @@ const Label = styled.Text`
   color: ${colors.black};
 `;
 
-const AbSoluteItem = styled.View`
+const AbSoluteItem = styled.TouchableOpacity`
   position: absolute;
   top: 10px;
-
   right: 20px;
 `;
