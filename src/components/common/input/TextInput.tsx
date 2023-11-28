@@ -3,7 +3,7 @@ import {colors} from 'constants/colors';
 import React, {useState} from 'react';
 import styled from 'styled-components/native';
 import CustomImage from '../CustomImage';
-import {Spacer, TouchableOpacityBtn} from 'components/common';
+import {Spacer} from 'components/common';
 
 export type TextInputProps = {
   label?: string;
@@ -97,7 +97,7 @@ const Label = styled.Text`
   color: ${colors.black};
 `;
 
-const AbSoluteItem = styled(TouchableOpacityBtn)`
+const AbSoluteItem = styled.TouchableOpacity`
   position: absolute;
   top: 10px;
   right: 20px;

@@ -3,18 +3,30 @@ import DatePicker from 'react-native-date-picker';
 
 type CustomDatePickerProps = {
   date: Date;
-  onDateChange: (date: Date) => void;
   mode?: 'date' | 'time' | 'datetime';
+  modal?: boolean;
+  open?: boolean;
+  onConfirm?: (date: Date) => void;
+  onCancel?: () => void;
 };
 
 const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   date,
-  onDateChange,
   mode = 'date',
-  ...rest
+  modal,
+  open,
+  onConfirm,
+  onCancel,
 }) => {
   return (
-    <DatePicker date={date} onDateChange={onDateChange} mode={mode} {...rest} />
+    <DatePicker
+      date={date}
+      open={open}
+      modal={modal}
+      mode={mode}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
+    />
   );
 };
 

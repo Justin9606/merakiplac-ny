@@ -19,6 +19,7 @@ const HomeScreen = () => {
 
   //filtering option states
   const [headLineFilter, setHeadLineFilter] = useState('');
+  const [dateFilter, setDateFilter] = useState('');
 
   const dataFetch = async () => {
     setLoading(true);
@@ -27,6 +28,7 @@ const HomeScreen = () => {
         params: {
           page: page,
           q: headLineFilter,
+          begin_date: dateFilter,
         },
       });
       if (page === 0) {
@@ -40,10 +42,9 @@ const HomeScreen = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     dataFetch();
-  }, [page]);
+  }, [page, headLineFilter, dateFilter]);
 
   const handleToggleScrap = (newsItems: NewsType) => {
     toggleScrap(setScrapList, newsItems);
@@ -54,6 +55,7 @@ const HomeScreen = () => {
     <>
       <CustomHeader
         headerType="custom"
+        headlineFilteredText={headLineFilter}
         onPressHeaderFilter={() => setModalVisible(true)}
       />
 
@@ -61,20 +63,25 @@ const HomeScreen = () => {
         onEndReached={() => {
           if (!loading) {
             setPage(prevPage => prevPage + 1);
-            dataFetch();
           }
         }}
         onEndReachedThreshold={0.5}
         ListFooterComponent={loading ? <ActivityIndicator /> : null}
         ListHeaderComponent={
-          <FilterModal
-            isVisible={modalVisible}
-            onApplyFilter={(newHeadlineFilter: string) => {
-              setHeadLineFilter(newHeadlineFilter);
-              setPage(0);
-              setModalVisible(false);
-            }}
-          />
+          <>
+            <FilterModal
+              isVisible={modalVisible}
+              onApplyFilter={(
+                newHeadlineFilter: string,
+                newDateFilter: string,
+              ) => {
+                setHeadLineFilter(newHeadlineFilter);
+                setDateFilter(newDateFilter);
+                setPage(0);
+                setModalVisible(false);
+              }}
+            />
+          </>
         }
         data={data}
         renderItem={({item, index}) => {
@@ -86,9 +93,13 @@ const HomeScreen = () => {
               index={index}
               onPress={() =>
                 navigation.navigate('WebViewScreen', {
+                  _id: item._id,
                   WebViewUrl: item.web_url,
                   title: item.headline.main,
-                  originWhitelist: ['*'],
+                  isScrapped: isScrapped,
+                  pub_date: formatDateWithDay(item.pub_date),
+                  source: item.source,
+                  byline: item?.byline.original,
                 })
               }
               onPressScrapBtn={() => handleToggleScrap(item)}

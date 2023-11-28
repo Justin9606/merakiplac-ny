@@ -42,7 +42,7 @@ const NewsList: React.FC<Props> = ({
 
 export default memo(NewsList);
 
-const NewsWrapper = styled(TouchableOpacityBtn)<{index?: number}>`
+const NewsWrapper = styled.TouchableOpacity<{index?: number}>`
   display: flex;
   background-color: ${colors.white};
   border-radius: 8px;

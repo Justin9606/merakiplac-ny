@@ -48,9 +48,13 @@ const ScrapScreen = () => {
               index={index}
               onPress={() =>
                 navigation.navigate('WebViewScreen', {
+                  _id: item._id,
                   WebViewUrl: item.web_url,
                   title: item.headline.main,
-                  originWhitelist: ['*'],
+                  isScrapped: isScrapped,
+                  pub_date: formatDateWithDay(item.pub_date),
+                  source: item.source,
+                  byline: item?.byline.original,
                 })
               }
               onPressScrapBtn={() => handleToggleScrap(item)}

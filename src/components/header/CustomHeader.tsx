@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React, {useLayoutEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {ActiveStar, BackBtn, HomeInActive, InActiveStar} from 'assets';
+import {ActiveStar, BackBtn, InActiveStar} from 'assets';
 import CustomImage from 'components/common/CustomImage';
 import {FilterButton, TouchableOpacityBtn} from 'components/common/buttons';
 import {colors} from 'constants/colors';
@@ -19,8 +19,9 @@ type Props = {
   isScrapped?: boolean;
 
   //custom header types
-  active?: boolean;
-  filterHeaderText?: string;
+  headlineFilteredText?: string;
+  dateFilteredText?: string;
+  countryFilteredText?: string;
   onPressHeaderFilter?: () => void;
 };
 
@@ -37,8 +38,9 @@ const CustomHeader: React.FC<Props> = ({
   onRightBtnPress,
 
   //custom header types
-  active,
-  filterHeaderText,
+  headlineFilteredText,
+  dateFilteredText,
+  countryFilteredText,
   onPressHeaderFilter,
 }) => {
   const navigation = useNavigation();
@@ -78,22 +80,22 @@ const CustomHeader: React.FC<Props> = ({
       <HeaderWrapper>
         <HeaderContainer>
           <FilterButton
-            text={filterHeaderText ? filterHeaderText : '전체 헤드라인'}
+            text={headlineFilteredText ? headlineFilteredText : '전체 헤드라인'}
             iconType={'search'}
-            active={active}
+            active={!!headlineFilteredText}
             onPress={onPressHeaderFilter}
           />
           <Spacer width={7} />
           <FilterButton
-            text={filterHeaderText ? filterHeaderText : '전체 날짜'}
+            text={dateFilteredText ? dateFilteredText : '전체 날짜'}
             iconType={'calendar'}
-            active={active}
+            active={!!dateFilteredText}
             onPress={onPressHeaderFilter}
           />
           <Spacer width={7} />
           <FilterButton
-            text={filterHeaderText ? filterHeaderText : '전체 국가'}
-            active={active}
+            text={countryFilteredText ? countryFilteredText : '전체 국가'}
+            active={!!countryFilteredText}
             onPress={onPressHeaderFilter}
           />
         </HeaderContainer>
