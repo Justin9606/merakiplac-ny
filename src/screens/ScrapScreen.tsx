@@ -54,11 +54,11 @@ const ScrapScreen = () => {
                 })
               }
               onPressScrapBtn={() => handleToggleScrap(item)}
-              headLine={item?.headline.main}
+              headline={item?.headline.main}
               isScrapped={isScrapped}
-              newsDate={formatDateWithDay(item.pub_date)}
-              reportedSource={item.source}
-              reportedBy={item?.byline.original}
+              pub_date={formatDateWithDay(item.pub_date)}
+              source={item.source}
+              byline={item?.byline.original}
             />
           );
         }}

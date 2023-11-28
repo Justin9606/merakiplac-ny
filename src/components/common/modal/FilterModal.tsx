@@ -1,49 +1,45 @@
-import React from 'react';
-import Modal from 'react-native-modal';
+import React, {useState} from 'react';
 import styled from 'styled-components/native';
-import {colors} from 'constants/colors';
-import {PrimaryButton, Spacer, TextInput} from 'components/common';
+import {Modal, PrimaryButton, Spacer, TextInput} from 'components/common';
+import {TextInputProps} from '../input/TextInput';
 
 type Props = {
   isVisible?: boolean;
-  onApplyFilter: () => void;
-};
+  onApplyFilter: (filter: string) => void;
+} & TextInputProps;
 
 const FilterModal: React.FC<Props> = ({isVisible, onApplyFilter}) => {
-  return (
-    <ModalWrapper>
-      <Modal isVisible={isVisible}>
-        <ModalContainer>
-          <Spacer height={20} />
-          <TextInput
-            label={'헤드라인'}
-            placeholder="검색하실 헤드라인을 입력해주세요."
-          />
-          <TextInput
-            label={'헤드라인'}
-            placeholder="검색하실 헤드라인을 입력해주세요."
-            rightItemType={'calendar'}
-          />
+  const [localHeadlineFilter, setLocalHeadlineFilter] = useState('');
+  const [localDateFilter, setLocalDateFiler] = useState('');
 
-          <AbsoluteButton>
-            <PrimaryButton text={'필터 적용하기'} onPress={onApplyFilter} />
-          </AbsoluteButton>
-        </ModalContainer>
-      </Modal>
-    </ModalWrapper>
+  const _onHandleFilter = () => {
+    onApplyFilter(localHeadlineFilter);
+  };
+
+  return (
+    <Modal isVisible={isVisible}>
+      <Spacer height={20} />
+      <TextInput
+        label={'헤드라인'}
+        placeholder="검색하실 헤드라인을 입력해주세요."
+        onChangeText={setLocalHeadlineFilter}
+        value={localHeadlineFilter}
+      />
+      <TextInput
+        label={'날짜'}
+        placeholder="날짜를 선택해주세요. ex:(2023.12.12)"
+        rightItemType={'calendar'}
+        onChangeText={setLocalDateFiler}
+        onPressDatePicker={() => {}}
+      />
+      <AbsoluteButton>
+        <PrimaryButton text={'필터 적용하기'} onPress={_onHandleFilter} />
+      </AbsoluteButton>
+    </Modal>
   );
 };
 
 export default FilterModal;
-
-const ModalWrapper = styled.View`
-  flex: 1;
-`;
-const ModalContainer = styled.View`
-  min-height: 480px;
-  background-color: ${colors.white};
-  border-radius: 16px;
-`;
 
 const AbsoluteButton = styled.View`
   position: absolute;

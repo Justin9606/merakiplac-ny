@@ -10,12 +10,12 @@ type Props = {
 } & NewsType;
 
 const NewsList: React.FC<Props> = ({
-  index,
   _id,
-  headLine,
-  newsDate,
-  reportedSource,
-  reportedBy,
+  index,
+  headline,
+  pub_date,
+  source,
+  byline,
   isScrapped,
   onPress,
   onPressScrapBtn,
@@ -23,18 +23,18 @@ const NewsList: React.FC<Props> = ({
   return (
     <NewsWrapper id={_id} onPress={onPress} index={index}>
       <HeadLineWrapper>
-        <HeadLine numberOfLines={2}>{headLine}</HeadLine>
+        <HeadLine numberOfLines={2}>{headline}</HeadLine>
         <TouchableOpacityBtn onPress={onPressScrapBtn}>
           <CustomImage image={isScrapped ? ActiveStar : InActiveStar} />
         </TouchableOpacityBtn>
       </HeadLineWrapper>
       <ReportedByWrapper>
         <ReportedByContainer>
-          <ReportedBy>{reportedSource}</ReportedBy>
+          <ReportedBy>{source}</ReportedBy>
           <Spacer width={8} />
-          <ReportedBy>{reportedBy}</ReportedBy>
+          <ReportedBy>{byline}</ReportedBy>
         </ReportedByContainer>
-        <NewsDate>{newsDate}</NewsDate>
+        <NewsDate>{pub_date}</NewsDate>
       </ReportedByWrapper>
     </NewsWrapper>
   );

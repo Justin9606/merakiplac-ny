@@ -1,10 +1,10 @@
 type NewsType = {
   _id: string;
   index?: number;
-  headLine: string;
-  newsDate: string;
-  reportedSource: string;
-  reportedBy: string;
+  headline: string;
+  pub_date: string;
+  source: string;
+  byline: string;
   isScrapped: boolean;
   onPress?: () => void;
   onPressScrapBtn?: () => void;

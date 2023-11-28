@@ -11,11 +11,14 @@ import {toggleScrap} from 'utils/scrapUtils';
 import {scrapListAtom} from 'atoms/scrapListAtom';
 
 const HomeScreen = () => {
+  const [scrapList, setScrapList] = useRecoilState(scrapListAtom);
+  const [data, setData] = useState<NewsType[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<NewsType[]>([]);
-  const [scrapList, setScrapList] = useRecoilState(scrapListAtom);
+
+  //filtering option states
+  const [headLineFilter, setHeadLineFilter] = useState('');
 
   const dataFetch = async () => {
     setLoading(true);
@@ -23,6 +26,7 @@ const HomeScreen = () => {
       const response = await API.get('/search/v2/articlesearch.json', {
         params: {
           page: page,
+          q: headLineFilter,
         },
       });
       if (page === 0) {
@@ -65,7 +69,9 @@ const HomeScreen = () => {
         ListHeaderComponent={
           <FilterModal
             isVisible={modalVisible}
-            onApplyFilter={() => {
+            onApplyFilter={(newHeadlineFilter: string) => {
+              setHeadLineFilter(newHeadlineFilter);
+              setPage(0);
               setModalVisible(false);
             }}
           />
@@ -86,11 +92,11 @@ const HomeScreen = () => {
                 })
               }
               onPressScrapBtn={() => handleToggleScrap(item)}
-              headLine={item?.headline.main}
+              headline={item?.headline.main}
               isScrapped={isScrapped}
-              newsDate={formatDateWithDay(item.pub_date)}
-              reportedSource={item.source}
-              reportedBy={item?.byline.original}
+              pub_date={formatDateWithDay(item.pub_date)}
+              source={item.source}
+              byline={item?.byline.original}
             />
           );
         }}
